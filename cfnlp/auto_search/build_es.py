@@ -7,6 +7,15 @@
 @File    : build_es.py
 @Software: PyCharm
 @Site    : https://github.com/zhangyuo
+@DECS    :
+ES          MySQL
+Index       Database
+Type        Table
+Document    Row
+Filed       Column
+Mapping     Schema
+Shard       Partition
+Query DSL   SQL
 """
 
 from cfnlp.auto_search.config.config import *
@@ -16,12 +25,18 @@ import requests
 import json
 
 
-def create_index(index):
+def create_index(index, number_of_shards=5, number_of_replicas=1):
     """
     构建es索引
     :return:
     """
-    command = "curl -XPUT %s/%s " % (ES_URL, index)
+    # command = "curl -XPUT %s/%s " % (ES_URL, index)
+    #     # p = subprocess.Popen(command, shell=True)
+    #     # p.wait()
+    #     # logger.info("build es index success.")
+    content_type = 'content-type: application/json'
+    settings = "{\"settings\": {\"number_of_shards\": %s, \"number_of_replicas\": %s}}" % (number_of_shards, number_of_replicas)
+    command = "curl -XPUT %s/%s/ -H \'%s\' -d \'%s\'" % (ES_URL, index, content_type, settings)
     p = subprocess.Popen(command, shell=True)
     p.wait()
     logger.info("build es index success.")
@@ -65,6 +80,8 @@ def insert_data(index, type, id, json):
 
 def set_settings(index, rep_num=2):
     """
+    settings是修改分片和副本数的。
+    分片和副本的数量可以在创建index的时候指定，index创建之后，只能修改副本数量，不能修改分片。
     已存在索引时，只能修改副本数量
     :param index: es索引
     :param rep_num: 副本数量
@@ -86,6 +103,7 @@ def set_settings(index, rep_num=2):
 
 def set_mappings(index, mappings):
     """
+    Mapping,就是对索引库中索引的字段名称及其数据类型进行定义，类似于mysql中的表结构信息。
     已存在索引时，可增加mappings的属性值(字段类型)，使用哪种分词器
     :param index:
     :param mappings: json格式
@@ -105,14 +123,19 @@ def set_mappings(index, mappings):
 
 
 if __name__ == '__main__':
-    # delete_index(DOCS_INDEX)
+    # create_index('test_index', 2, 0)
+    delete_index('test_index')
+
     # create_index(DOCS_INDEX)
+
+    # delete_index(DOCS_INDEX)
+
     # json = {"name": "zhangyuo"}
     # insert_data(DOCS_INDEX, DOCS_TYPE, '1', json)
 
     # 修改settings
-    # set_settings(DOCS_INDEX, 2)
+    # set_settings(DOCS_INDEX, rep_num=2)
 
     # 修改mappings
-    mappings = {"properties": {"title": {"type": "string", "analyzer": "ik_max_word"}}}
-    set_mappings(DOCS_INDEX, mappings)
+    # mappings = {"properties": {"title": {"type": "string", "analyzer": "ik_max_word"}}}
+    # set_mappings(DOCS_INDEX, mappings)

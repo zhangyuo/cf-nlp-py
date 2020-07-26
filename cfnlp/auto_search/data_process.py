@@ -19,15 +19,15 @@ from cfnlp.tools.date_format import dateFormate
 
 class docsTrans(object):
     """
-    mongo数据库读取文件，并构建索引存入es
+    mongo数据库读取文件，并构建索引、存入es
     """
 
-    def __init__(self, index, type):
+    def __init__(self, index, type, number_of_shards=6, number_of_replicas=1):
         self.index = index
         self.type = type
         self.db = mongoConnector(MONGODB_SERVER, MONGODB_PORT, MONGODB_DB, MONGODB_COLLECTION)
         delete_index(index)
-        create_index(index)
+        create_index(index, number_of_shards=number_of_shards, number_of_replicas=number_of_replicas)
         self.date_model = dateFormate('../stable/date_format.json')
 
     def load_docs(self):
@@ -53,7 +53,7 @@ class docsTrans(object):
                         "title": i.get('title', ''),
                         "titleNum": i.get('titleNum', '')
                     }
-                    insert_data(self.index, self.type, id, json)
+                    insert_data(self.index, self.type, id, json) # 插入数据时配置index的type
                     logger.info('insert data: %d' % num)
             logger.info('insert data finished.')
         except Exception, e:
@@ -80,5 +80,6 @@ class docsTrans(object):
 
 
 if __name__ == '__main__':
-    process = docsTrans(DOCS_INDEX, DOCS_TYPE)
+    # 设置副本为0，避免单节点集群时存在未被分配的unsigned分片
+    process = docsTrans(DOCS_INDEX, DOCS_TYPE, 6, 0)
     process.load_docs()

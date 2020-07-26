@@ -12,8 +12,8 @@
 # es
 # ES_URL = '192.168.152.87:9200'
 ES_URL = 'localhost:9200'
-DOCS_INDEX = 'docs_index'
-DOCS_TYPE = 'policy'
+DOCS_INDEX = 'index_docs'
+DOCS_TYPE = 'type_policy'
 
 # mongo
 # MONGODB_SERVER = '192.168.152.87'
