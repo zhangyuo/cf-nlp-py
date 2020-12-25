@@ -145,7 +145,7 @@ class dateFormate(object):
                         info['day'] = '0' + str(_day)
                 final_list.append(info)
             return final_list
-        except Exception, e:
+        except Exception as e:
             logger.error('extract date failed for %s' % str(e))
             return []
 
@@ -219,7 +219,7 @@ class dateFormate(object):
                     self.result_list.append(date_dict)
                     self.index_list.append(index)
                 return self.result_list, self.index_list
-        except Exception, e:
+        except Exception as e:
             logger.error('update date describe failed for %s' % str(e))
             return self.result_list, self.index_list
 
@@ -254,7 +254,7 @@ class dateFormate(object):
         :return:
         """
         result1 = self.pattern_ymr1.findall(text)
-        symbol = re.split(ur"[}\\]", self.pattern_ymr1.pattern)
+        symbol = re.split(r"[}\\]", self.pattern_ymr1.pattern)
         _len = 0
         for result in result1:
             index = text.index(result, _len)
@@ -283,7 +283,7 @@ class dateFormate(object):
         :return:
         """
         result2 = self.pattern_ymr2.findall(text)
-        pattern = ur'[年月日]'
+        pattern = r'[年月日]'
         length = 4
         _len = 0
         for result in result2:
@@ -298,7 +298,7 @@ class dateFormate(object):
         :return:
         """
         result3 = self.pattern_ymr3.findall(text)
-        symbol = re.split(ur"[}\\]", self.pattern_ymr3.pattern)
+        symbol = re.split(r"[}\\]", self.pattern_ymr3.pattern)
         length = 3
         _len = 0
         for result in result3:
@@ -315,7 +315,7 @@ class dateFormate(object):
         :return:
         """
         result4 = self.pattern_ym1.findall(text)
-        symbol = re.split(ur"[}\\]", self.pattern_ym1.pattern)
+        symbol = re.split(r"[}\\]", self.pattern_ym1.pattern)
         length = 2
         _len = 0
         for result in result4:
@@ -332,7 +332,7 @@ class dateFormate(object):
         :return:
         """
         result5 = self.pattern_ym2.findall(text)
-        pattern = ur'[年月]'
+        pattern = r'[年月]'
         length = 3
         _len = 0
         for result in result5:
@@ -347,7 +347,7 @@ class dateFormate(object):
         :return:
         """
         result6 = self.pattern_ym3.findall(text)
-        symbol = re.split(ur"[}\\]", self.pattern_ym3.pattern)
+        symbol = re.split(r"[}\\]", self.pattern_ym3.pattern)
         length = 2
         _len = 0
         for result in result6:
@@ -364,7 +364,7 @@ class dateFormate(object):
         :return:
         """
         result7 = self.pattern_ym4.findall(text)
-        pattern = ur'[年月]'
+        pattern = r'[年月]'
         length = 3
         _len = 0
         for result in result7:
@@ -379,7 +379,7 @@ class dateFormate(object):
         :return:
         """
         result8 = self.pattern_ym5.findall(text)
-        pattern = ur'[年月]'
+        pattern = r'[年月]'
         length = 3
         _len = 0
         for result in result8:
@@ -398,7 +398,7 @@ class dateFormate(object):
         for result in result13:
             index = text.index(result, _len)
             _len = index + len(result)
-            seg = re.split(ur'[月日]', result)
+            seg = re.split(r'[月日]', result)
             if len(seg) == 3:
                 year = ''
                 month = seg[0]
@@ -431,7 +431,7 @@ class dateFormate(object):
         :return:
         """
         result9 = self.pattern_y.findall(text)
-        pattern = ur'[年]'
+        pattern = r'[年]'
         length = 1
         _len = 0
         for result in result9:
@@ -447,7 +447,7 @@ class dateFormate(object):
         :return:
         """
         result10 = self.pattern_m1.findall(text)
-        symbol = re.split(ur"[}\\]", self.pattern_m1.pattern)
+        symbol = re.split(r"[}\\]", self.pattern_m1.pattern)
         _len = 0
         for result in result10:
             index = text.index(result, _len)
@@ -483,7 +483,7 @@ class dateFormate(object):
         :return:
         """
         result11 = self.pattern_m2.findall(text)
-        symbol = re.split(ur"[}\\]", self.pattern_m2.pattern)
+        symbol = re.split(r"[}\\]", self.pattern_m2.pattern)
         _len = 0
         for result in result11:
             index = text.index(result, _len)
@@ -607,10 +607,10 @@ def load_date_model(path):
     :return:
     """
     try:
-        path = unicode(path, 'utf-8')
+        path = path.decode('utf-8')
         result_list = json.load(open(path, 'rb'))
         return result_list
-    except Exception, e:
+    except Exception as e:
         logger.error('load date model failed for %s' % str(e))
         return []
 

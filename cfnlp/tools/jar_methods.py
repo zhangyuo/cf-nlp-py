@@ -60,7 +60,7 @@ class NLPModel(object):
             for info in result:
                 result_list.append(list(info))
             return result_list
-        except Exception, e:
+        except Exception as e:
             logger.error('ansj seg failed for %s' % str(e))
             return None
 
@@ -77,7 +77,7 @@ class NLPModel(object):
             for info in result:
                 result_list.append(list(info))
             return result_list
-        except Exception, e:
+        except Exception as e:
             logger.error('ansj seg failed for %s' % str(e))
             return None
 
@@ -103,7 +103,7 @@ class NLPModel(object):
                 for info in result:
                     result_list.append(list(info))
             return result_list
-        except Exception, e:
+        except Exception as e:
             logger.error('ansj seg failed for %s' % str(e))
             return None
 
@@ -122,7 +122,6 @@ class NLPModel(object):
                                                                                     self.user_dic[
                                                                                         dict_key.values()[0]]))]
                 for info in result:
-
                     result_list.append(list(info))
             elif len(dict_key) == 2:
                 result = [list(k) for k in list(self.ansj_api.textTokenizerUserStop(self.ansj_model, text, type,
@@ -132,7 +131,7 @@ class NLPModel(object):
                 for info in result:
                     result_list.append(list(info))
             return result_list
-        except Exception, e:
+        except Exception as e:
             logger.error('ansj seg failed for %s' % str(e))
             return None
 
@@ -148,7 +147,7 @@ class NLPModel(object):
         try:
             area = self.loc_api.getFormatArea(self.area_model, text)
             return area
-        except Exception, e:
+        except Exception as e:
             logger.error('area extractiopn failed for %s' % str(e))
             return None
 
@@ -187,7 +186,7 @@ class NLPModel(object):
                                       "area": dist,
                                       "abbreviation": abbr})
                 return area_list
-        except Exception, e:
+        except Exception as e:
             logger.error('area extractiopn failed for %s' % str(e))
             return None
     #############__area_extra methods__end###################
@@ -195,18 +194,18 @@ class NLPModel(object):
 
 if __name__ == '__main__':
     # area extract demo
-    # model_path = os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + '.') + '/stable/'
-    # nlp_model = NLPModel(model_path, model_path + 'jar-jpype-connector-1.0.jar')
-    # text = '重庆綦江是个好地方，渝中区，深圳是紧邻粤港澳大湾区'
-    # # area = nlp_model.area_extract(text)
-    # area = nlp_model.get_format_area(text)
-    # print(area)
-
-    # ansj
     model_path = os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + '.') + '/stable/'
     nlp_model = NLPModel(model_path, model_path + 'jar-jpype-connector-1.0.jar')
-    text = '红酒（Red wine）是葡萄酒的一种，并不一定特指红葡萄酒。红酒的成分相当简单，是经自然发酵酿造出来的果酒，' \
-           '含有最多的是葡萄汁，葡萄酒有许多分类方式。还有2.7%和3.3亿元'
-    terms = nlp_model.text_tokenizer(text)
-    for term in terms:
-        print('%s\t%s' % (term[0], term[1]))
+    text = '重庆綦江是个好地方，渝中区，深圳是紧邻粤港澳大湾区'
+    # area = nlp_model.area_extract(text)
+    area = nlp_model.get_format_area(text)
+    print(area)
+
+    # ansj
+    # model_path = os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + '.') + '/stable/'
+    # nlp_model = NLPModel(model_path, model_path + 'jar-jpype-connector-1.0.jar')
+    # text = '红酒（Red wine）是葡萄酒的一种，并不一定特指红葡萄酒。红酒的成分相当简单，是经自然发酵酿造出来的果酒，' \
+    #        '含有最多的是葡萄汁，葡萄酒有许多分类方式。还有2.7%和3.3亿元'
+    # terms = nlp_model.text_tokenizer(text)
+    # for term in terms:
+    #     print('%s\t%s' % (term[0], term[1]))

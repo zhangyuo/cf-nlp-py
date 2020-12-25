@@ -44,7 +44,7 @@ class esConnector(object):
             }
             result = self.es.search(self.index, self.doc_type, body=dsl_query)
             return result
-        except Exception, e:
+        except Exception as e:
             logger.error('search all doc failed for %s' % str(e))
             return None
 
@@ -69,7 +69,7 @@ class esConnector(object):
                 return result.get('hits', {}).get('hits', [])[0]
             else:
                 return []
-        except Exception, e:
+        except Exception as e:
             logger.error('search doc by id failed for %s' % str(e))
             return None
 
@@ -83,7 +83,7 @@ class esConnector(object):
         try:
             result = self.es.index(self.index, self.doc_type, body=info)
             return result
-        except Exception, e:
+        except Exception as e:
             logger.error('insert single info failed for %s' % str(e))
             return None
 
@@ -112,7 +112,7 @@ class esConnector(object):
                 return True
             else:
                 return False
-        except Exception, e:
+        except Exception as e:
             logger.error('check info existed failed for %s' % str(e))
             return None
 

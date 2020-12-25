@@ -3,12 +3,14 @@
 import os
 from datetime import date
 
-PATH="log/"
+PATH = "../log/"
+
 
 def assure_path_exists(path):
-        dir = os.path.dirname(path)
-        if not os.path.exists(dir):
-                os.makedirs(dir)
+    dir = os.path.dirname(path)
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+
 
 assure_path_exists(PATH)
 
@@ -36,7 +38,7 @@ PINGAN_LOGGING_CONF = {
             "class": "logging.handlers.RotatingFileHandler",
             "level": "INFO",
             "formatter": "pingan",
-            "filename": PATH +date.today().isoformat()+".log",
+            "filename": PATH + date.today().isoformat() + ".log",
             "maxBytes": 10485760,
             "backupCount": 20,
             "encoding": "utf8"

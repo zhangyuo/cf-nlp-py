@@ -1,12 +1,12 @@
-# coding=utf-8
+#!/usr/bin/env python
+# coding:utf-8
 """
-@ license: Apache Licence
-@ github: invoker4zoo
-@ author: invoker/cc
-@ wechart: whatshowlove
-@ software: PyCharm
-@ file: setup.py.py
-@ time: $19-2-20 下午3:51
+# @Time     : 2020-08-12 17:49
+# @Author   : Zhangyu
+# @Email    : zhangycqupt@163.com
+# @File     : setup1.py
+# @Software : PyCharm
+# @Desc     :
 """
 
 from setuptools import setup, find_packages
@@ -15,24 +15,24 @@ setup(
     name='cfnlp',
     version='0.1',
     description=(
-        'CQFAE nlp python lib'
+        'org nlp python lib'
     ),
     long_description=open('README.md', 'r').read(),
     long_description_content_type='text/markdown',
-    author='cc',
-    author_email='412214410@qq.com',
+    author='zhangyu',
+    author_email='976894176@qq.com',
     license='MIT',
     maintainer='cc&zhangyu&tanrui',
-    maintainer_email='412214410@qq.com',
+    maintainer_email='976894176@qq.com',
     packages=find_packages(),
     platforms=['all'],
-    url='https://github.com/invoker4zoo',
+    url='XX',
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries'
-    ]
+    ], install_requires=['flask']
 
 )

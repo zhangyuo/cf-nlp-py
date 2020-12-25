@@ -25,7 +25,7 @@ class BaseDocumentAnalysis(object):
         try:
             with open(config_path, 'rb') as f:
                 self.config = json.loads(f.read())
-        except Exception, e:
+        except Exception as e:
             logger.error('loading config file failed for %s' % str(e))
             sys.exit(1)
 
@@ -69,7 +69,7 @@ class BaseDocumentAnalysis(object):
                 else:
                     pass
 
-        except Exception, e:
+        except Exception as e:
             logger.error('analysis config file failed for %s' % str(e))
 
     def _check_config_valid(self):
@@ -104,6 +104,6 @@ class BaseDocumentAnalysis(object):
                     else:
                         return False
             return True
-        except Exception, e:
+        except Exception as e:
             logger.error('check config file valid failed for %s' % str(e))
             return False

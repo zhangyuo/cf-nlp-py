@@ -183,7 +183,7 @@ normal nlp python lib
     #             cursor.execute(sql, sql_params)
     #             result = cursor.fetchone()
     #             return result
-    #     except Exception, e:
+    #     except Exception as e:
     #         logger.error('select one info failed for %s' % str(e))
     #         return None
 ```

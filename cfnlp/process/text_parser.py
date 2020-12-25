@@ -43,7 +43,7 @@ class GovDocAnalysis(BaseTextParser):
                                                               {'sort': {'pubTime': 1}}]).batch_size(1):
                 content = item.get('content_text', '')
                 yield content
-        except Exception, e:
+        except Exception as e:
             logger.error('load gov document library failed for %s' % str(e))
 
 if __name__ == '__main__':

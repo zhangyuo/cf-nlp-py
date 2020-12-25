@@ -282,7 +282,7 @@ class htmlTableAnalysis(object):
                         pass
             # self.matrix = str_matrix
             return str_matrix
-        except Exception, e:
+        except Exception as e:
             logger.error('get table matrix failed')
             return None
 
@@ -391,7 +391,7 @@ class htmlTableAnalysis(object):
                                     info_dic[key][inner_key] = matrix[j + row_head][i + _col_head]
                     table_info.append(info_dic)
             return table_info
-        except Exception, e:
+        except Exception as e:
             logger.error('get table info failed for %s' % str(e))
             return []
 
@@ -424,7 +424,7 @@ class htmlTableAnalysis(object):
                     info['tableInfo'] = self.generate_table_json(info['matrix'], row_head, col_head)
                 self.table_info.append(info)
             return self.table_info
-        except Exception, e:
+        except Exception as e:
             logger.error('parser html failed for %s' % str(e))
 
 

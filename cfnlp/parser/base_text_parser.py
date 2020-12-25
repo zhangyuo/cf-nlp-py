@@ -66,7 +66,7 @@ class BaseTextParser(object):
                             yield doc_str_list
             else:
                 yield None
-        except Exception, e:
+        except Exception as e:
             logger.error('loading file failed for %s' % str(e))
 
     def _iter_load_file(self):
@@ -158,7 +158,7 @@ class BaseTextParser(object):
             # 保存字典文件
             self.dictionary.save(dictionary_path)
             logger.info('library dictionary file building finished')
-        except Exception, e:
+        except Exception as e:
             logger.error('generate document library dictionary file failed for %s' % str(e))
 
     def generate_docs_tfidf(self, dictionary_model_path, tfidf_model_path):
@@ -184,7 +184,7 @@ class BaseTextParser(object):
             # 生成整个文档库的tfidf模型文件
             corpora.MmCorpus.serialize(tfidf_model_path, docs_tfidf_list, id2word=dictionary)
             logger.info('library tfidf file building finished')
-        except Exception, e:
+        except Exception as e:
             logger.error('generate documents library tfidf file failed for %s' % str(e))
 
     def generate_docs_word2vector(self, word2vector_file_path, vector_size=300, window=5, min_count=5):
@@ -204,7 +204,7 @@ class BaseTextParser(object):
             logger.info('generate document library word2vector model success, using %f seconds' % process_time)
             # save vector file
             model.wv.save_word2vec_format(word2vector_file_path, binary=False)
-        except Exception, e:
+        except Exception as e:
             logger.error('generate documents library word2vector file failed for %s' % str(e))
 
     # def generate_docs_corpus(self, dictionary_file_path, corpus_file_path):
@@ -215,7 +215,7 @@ class BaseTextParser(object):
     #     """
     #     try:
     #         id2word = gensim.corpora.Dictionary.load_from_text('wiki_en_wordids.txt')
-    #     except Exception, e:
+    #     except Exception as e:
     #         logger.error('generate documents library corpus file failed for %s' % str(e))
 
     def generate_docs_lsi(self, dictionary_file_path, tfidf_file_path, lsi_file_path, num_topics=100):
@@ -235,7 +235,7 @@ class BaseTextParser(object):
                 pickle.dump(lsi, f)
             logger.info('lsi model file building finished')
             # doc_lsi = lsi[doc_bow]
-        except Exception, e:
+        except Exception as e:
             logger.error('generate documents library lsi model file failed for %s' % str(e))
 
     def generate_docs_lda(self, dictionary_file_path, tfidf_file_path, lda_file_path, num_topics=100):
@@ -253,7 +253,7 @@ class BaseTextParser(object):
             with open(lda_file_path, 'wb') as f:
                 pickle.dump(lda, f)
                 logger.info('lda model file building finished')
-        except Exception, e:
+        except Exception as e:
             logger.error('generate documents library lda file failed for %s' % str(e))
 
     # def _initial_calculation_model(self):

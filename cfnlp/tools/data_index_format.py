@@ -56,7 +56,7 @@ class dataIndexFormate(object):
                 seg = self.seg_model.text_tokenizer(self.text)
 
             return self._get_data(seg)
-        except Exception, e:
+        except Exception as e:
             logger.error('extract data from text failed for %s' % str(e))
             return None
 
@@ -78,7 +78,7 @@ class dataIndexFormate(object):
                     inside_code -= 65248
                 rstring += unichr(inside_code)
             return rstring
-        except Exception, e:
+        except Exception as e:
             logger.error('text transaction failed for %s' % str(e))
 
     def _strB2Q(self, text):
@@ -97,7 +97,7 @@ class dataIndexFormate(object):
                     inside_code += 65248
                 rstring += unichr(inside_code)
             return rstring
-        except Exception, e:
+        except Exception as e:
             logger.error('text transaction failed for %s' % str(e))
 
     def _get_data(self, seg):
@@ -146,7 +146,7 @@ class dataIndexFormate(object):
                 last_term = _seg
 
             return data_list
-        except Exception, e:
+        except Exception as e:
             logger.error('get data failed for %s' % str(e))
             return None
 

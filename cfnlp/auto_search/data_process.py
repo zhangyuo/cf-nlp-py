@@ -56,7 +56,7 @@ class docsTrans(object):
                     insert_data(self.index, self.type, id, json) # 插入数据时配置index的type
                     logger.info('insert data: %d' % num)
             logger.info('insert data finished.')
-        except Exception, e:
+        except Exception as e:
             logger.error('insert data failed in %d item for %s' % (num, str(e)))
 
     def _clean_content(self, content):
@@ -74,7 +74,7 @@ class docsTrans(object):
                 else:
                     pass
             return trans_content
-        except Exception, e:
+        except Exception as e:
             logger.error('clean content html tag failed for %s' % str(e))
             return ''
 

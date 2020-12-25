@@ -7,6 +7,7 @@
 @File    : query_search.py
 @Software: PyCharm
 @Site    : https://github.com/zhangyuo
+@DESC    : 参考查询网站：https://www.cnblogs.com/UUUz/p/11170833.html
 """
 
 from elasticsearch import Elasticsearch
